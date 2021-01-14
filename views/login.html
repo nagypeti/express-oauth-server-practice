@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OAuth Authenticate</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class='container'>
+  <h1>Authentication On Our Server</h1>
+  <form action='/oauth/auth' method="post">
+    <div class='form-group'>
+      <input class='form-control' type="hidden" name='client_id'/>
+    </div>
+    <div class='form-group'>
+      <input class='form-control' type="hidden" name='redirect_uri'/>
+    </div>
+    <div class='form-group'>
+      <input class='form-control' type="hidden" name='response_type'/>
+    </div>
+    <div class='form-group'>
+      <input class='form-control' type="hidden" name='grant_type'/>
+    </div>
+    <div class='form-group'>
+      <input class='form-control' type="hidden" name='state'/>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input class='form-control auth' type="email" name="email" value="email@email.hu">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class='form-control auth' type="text" name="password" value="password" />
+    </div>
+    <input type='submit' class='btn btn-success' />
+  </form>
+  <script>
+  ;(function(){
+    const urlParams = new URLSearchParams(window.location.search)
+    ;['client_id','redirect_uri', 'response_type', 'grant_type', 'state'].forEach(type => {
+      const input = document.body.querySelector(`input[name=${type}]`)
+      const value = urlParams.get(type)
+      input.value = value
+    })
+    const error = urlParams.get('success') === 'false'
+    if(error) {
+      document.body.querySelectorAll('.auth').forEach(el => el.classList.add('is-invalid'))
+    }
+  }())
+  </script>
+</body>
+</html>
