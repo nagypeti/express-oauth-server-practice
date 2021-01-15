@@ -1,1 +1,11 @@
 node_modules
+build
+.DS_Store
+.vscode
+.yarn-error.log
+public/js
+public/css
+public/fonts
+public/static
+data/**/*
+log
